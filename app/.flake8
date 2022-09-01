@@ -1,0 +1,8 @@
+
+[flake8]
+exclude =
+    migrations,
+    __pycache__,
+    manage.py,
+    settings.py
+#all the development files eg. manage.py and settings.py , migrations or extra cache data while running is not included in checking code so excluded all

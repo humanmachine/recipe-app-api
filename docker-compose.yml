@@ -1,0 +1,14 @@
+version:  "3.9" #version of the docker compose syntax we'll be using and new vers. is released, it won't break out
+
+services:            
+  app:            #name of our app/ it will run our docker file
+    build:        #build docker file
+      context: .    #"."-means root or curr directory.. so we want to build dock file inside our curr dir where we are running the comm from
+      args:         # means when we are running yml file for development than dev requirements need not to be congig/ copied for deployment as its just used for development
+        - DEV=true
+    ports:            #ports 8000 in dock cont and our local mach
+      - "8000:8000"
+    volumes:          #to update info changed in loc machine to the container so that no need of building cont again and again
+      - ./app:/app
+    command: >        #used to run 
+      sh -c "python manage.py runserver 0.0.0.0:8000"

@@ -1,0 +1,17 @@
+# Git
+.git
+.gitignore
+
+#Docker
+.docker
+
+#Python removing all pycache from docker cont. to make it faster adn "*" helps in mentioning different types of files 
+#as alpine OS doesn't support pycache
+#also .env/venv/venv/ --> means to remove any more virt env as already a virt env is created and copied to docker
+app/__pycache__/
+app/*/__pycache__/
+app/*/*/__pycache__/
+app/*/*/*/__pycache__/
+.env/
+.venv/
+venv/
