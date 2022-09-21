@@ -20,6 +20,9 @@ ARG DEV=false
 # Created a virt. env and transfered all files from local machines to docker cont. and also created "django user" named container with no home and no pass
 RUN python -m venv /py && \   
     /py/bin/pip install --upgrade pip && \
+    apk add --update --no-cache postgresql-client && \
+    apk add --update --no-cache --virtual .tmp-build-deps \
+        build-base postgresql-dev musl-dev && \
     /py/bin/pip install -r /tmp/requirements.txt && \
     #gonna install development dependencies if true
     if [ $DEV = "true" ]; \     
@@ -27,6 +30,8 @@ RUN python -m venv /py && \
     fi && \    
     #end if style in shell scripting
     rm -rf /tmp && \
+    #removes temp build dependecies which keeps our dock file light weight
+    apk del .tmp-build-deps && \  
     adduser \
        --disabled-password \
        --no-create-home \
